@@ -33,5 +33,5 @@ jobs:
       - name: Run SonarScanner
         run: ./sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner
         env:
-          SONAR_HOST_URL: https://your-sonarqube-server-url
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
