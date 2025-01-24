@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/beatrs/sq-test/issues"
   },
-  "homepage": "https://github.com/beatrs/sq-test#readme"
+  "homepage": "https://github.com/beatrs/sq-test#readme",
+  "devDependencies": {
+    "sonarqube-scanner": "^4.2.6"
+  }
 }
