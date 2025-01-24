@@ -1,7 +1,7 @@
 {
   "name": "samplejs",
   "version": "1.0.0",
-  "description": "token: sqa_5f72a25ff82f2f819d8d64b4779ba29e79873dfa",
+  "description": "sq-test",
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
