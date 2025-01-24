@@ -1,26 +1,26 @@
 // A JavaScript script with intentional code smells
 
 // Hardcoded values (bad practice)
-var TAX_RATE = 0.2; // This should ideally come from a configuration file
-var prices = [100, 200, 300]; // Should be dynamic
+let TAX_RATE = 0.2; // This should ideally come from a configuration file
+let prices = [100, 200, 300]; // Should be dynamic
 
 // Poor variable naming conventions
-var x = 0; // Unclear variable name
-var temp = "temporary value"; // Unnecessary variable
+let x = 0; // Unclear variable name
+let temp = "temporary value"; // Unnecessary variable
 
 // Duplicate code
 function calculateTotal(prices) {
     let total = 0;
-    for (var i = 0; i < prices.length; i++) {
-        total += prices[i] + (prices[i] * TAX_RATE); // Tax logic duplicated here
+    for (let price of prices) {
+        total += price + (price * TAX_RATE); // Tax logic duplicated here
     }
     return total;
 }
 
 function calculateDiscountedTotal(prices) {
     let total = 0;
-    for (var i = 0; i < prices.length; i++) {
-        total += prices[i] - (prices[i] * 0.1); // Discount logic duplicated here
+    for (let price of prices) {
+        total += price - (price * 0.1); // Discount logic duplicated here
     }
     return total;
 }
@@ -30,12 +30,6 @@ function unusedFunction() {
     console.log("I am never called!");
 }
 
-// Poor error handling
-try {
-    let result = 10 / 0; // Division by zero
-} catch (error) {
-    console.log("An error occurred."); // Generic error message
-}
 
 // Long, unclear function
 function doStuff() {
@@ -60,4 +54,4 @@ doStuff();
 // }
 
 // Global variable pollution
-globalVar = "This is a global variable."; // No 'var', 'let', or 'const'
+let globalVar = "This is a global variable."; // No 'var', 'let', or 'const'
