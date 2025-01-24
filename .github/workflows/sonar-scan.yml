@@ -1,4 +1,4 @@
-name: SonarQube Analysis
+name: SonarQube Scan
 
 on:
   push:
@@ -9,39 +9,28 @@ on:
       - main
 
 jobs:
-  sonarqube:
-    name: SonarQube Scan
+  sonarQube:
+    name: SonarQube Analysis
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-      - name: Test Connectivity to SonarQube
-        run: curl -v ${{ secrets.SONAR_HOST_URL }}
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # Specify the version of Node.js required for your project
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+    - name: Install Dependencies
+      run: npm install
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install SonarScanner CLI
-        run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip sonar-scanner-cli-5.0.1.3006-linux.zip
-          chmod +x sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner
-
-      - name: Run SonarScanner
-        run: |
-          ./sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner \
-            -Dsonar.projectKey=samplejs \
-            -Dsonar.projectName=samplejs \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-          SONAR_HOST_URL: http://localhost:9000
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Run SonarQube Scan
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Your SonarQube token stored as a secret
+      run: |
+        npx sonarqube-scanner \
+          -Dsonar.projectKey=sq-test \
+          -Dsonar.organization=beatrs \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io
